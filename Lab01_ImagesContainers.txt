@@ -117,4 +117,14 @@ Untagged: hello-world@sha256:7e1a4e2d11e2ac7a8c3f768d4166c2defeb09d2a750b010412b
 Deleted: sha256:74cc54e27dc41bb10dc4b2226072d469509f2f22f1a3ce74f4a59661a1d44602
 Deleted: sha256:63a41026379f4391a306242eb0b9f26dc3550d863b7fdbb97d899f6eb89efe72
 
- 
+Daemon: 
+Disk And Execution MONitor (Monitor de Disco y Ejecución)
+Ejemplos de Daemons en Linux y Software
+📌 Algunos daemons conocidos:
+
+systemd → Administra el arranque y servicios en Linux.
+sshd → Maneja conexiones SSH.
+httpd → Servidor web Apache.
+dockerd → Daemon de Docker, que gestiona contenedores en segundo plano.
+En resumen, un daemon es un proceso que corre en segundo plano y provee 
+servicios sin requerir una sesión activa del usuario.
