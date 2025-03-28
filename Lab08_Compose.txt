@@ -61,13 +61,519 @@ http://localhost:5000/
 docker ps
 12. Ver las imagenes:
 docker images
-Inspeccionar las imagenes:
-docker inspect composetest_web
+
+Inspeccionar las imagenes: ok
+REPOSITORY        TAG         IMAGE ID       CREATED          SIZE
+composetest-web   latest      463b6e2ecafd   2 minutes ago    84.7MB
+compose-web       latest      ac8099a0636d   57 minutes ago   84.7MB
+docker-app        latest      a05d9cbea0cd   2 hours ago      590MB
+<none>            <none>      b997f4968452   2 hours ago      590MB
+<none>            <none>      20ba2b1f098e   3 hours ago      590MB
+<none>            <none>      910f6b4e2cfe   6 hours ago      590MB
+<none>            <none>      376c12b8cd30   7 hours ago      590MB
+<none>            <none>      f746c13b20de   7 hours ago      590MB
+<none>            <none>      630873d6edd6   23 hours ago     590MB
+<none>            <none>      c2ca55a66250   24 hours ago     590MB
+<none>            <none>      8f24e99b8da1   24 hours ago     590MB
+postgres          15-alpine   afbf3abf6aeb   4 weeks ago      273MB
+dpage/pgadmin4    latest      b2e76a3c5433   4 weeks ago      513MB
+redis             alpine      8f5c54441eb9   2 months ago     41.4MB
+busybox           latest      ff7a7936e930   6 months ago     4.28MB
+
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                                       NAMES
+7d1dbe9f7afb   redis:alpine      "docker-entrypoint.s…"   3 minutes ago   Up 2 minutes   6379/tcp                                    composetest-redis-1
+eb423d91c6d6   composetest-web   "python app.py"          3 minutes ago   Up 2 minutes   0.0.0.0:5000->5000/tcp, :::5000->5000/tcp   composetest-web-1
+
+docker inspect composetest_web (7d...)
+
+[
+    {
+        "Id": "7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622",
+        "Created": "2025-03-28T18:57:59.156664105Z",
+        "Path": "docker-entrypoint.sh",
+        "Args": [
+            "redis-server"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 173073,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2025-03-28T18:57:59.650494645Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:8f5c54441eb93183170be8c9fc2d8e8275171a6866ca1b4ae682a2ced6a98889",
+        "ResolvConfPath": "/var/lib/docker/containers/7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622/hostname",
+        "HostsPath": "/var/lib/docker/containers/7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622/hosts",
+        "LogPath": "/var/lib/docker/containers/7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622/7d1dbe9f7afbc5a3c4b64142ef9693f7375c32d250289f2efbb07fdd10ecb622-json.log",
+        "Name": "/composetest-redis-1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "composetest_default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/00aa6884285e906b2cbf1036f7349f61e75babe804ccb78dff75a14cb723cc65-init/diff:/var/lib/docker/overlay2/573b94821f3ba305d8de7a57f7ea2a4a83f067c860c89e3e9b4690e153dba41f/diff:/var/lib/docker/overlay2/fb39669d7eaa97a66a93e4e0c4b1e767de29c14945de809fe57d88f48b601900/diff:/var/lib/docker/overlay2/96217e8a60b1a63484f18bebb50ce6a55ed4d6a0b9c5182cb610bf3ed60b82a9/diff:/var/lib/docker/overlay2/18f3bd6f9f096270658d736291707d157cc9a699b58bd51b3fd3aadd693ac521/diff:/var/lib/docker/overlay2/63a4ed6d4a4102a7e7f98d162c29b9c205233cce3d7c4a6423b49780f4053582/diff:/var/lib/docker/overlay2/bccd6002b882793d47903f760a34993c9bec6662a4c4273bd1983f414d55415d/diff:/var/lib/docker/overlay2/20132ff235a5312e5347cd4b33185a8a8d8f4eab9c309d748ebf7af5fb9963d5/diff:/var/lib/docker/overlay2/4352abc24eb6144faf36769d64b08038f98e31b8220f27fe4bfaa6aa333d7d95/diff",
+                "MergedDir": "/var/lib/docker/overlay2/00aa6884285e906b2cbf1036f7349f61e75babe804ccb78dff75a14cb723cc65/merged",
+                "UpperDir": "/var/lib/docker/overlay2/00aa6884285e906b2cbf1036f7349f61e75babe804ccb78dff75a14cb723cc65/diff",
+                "WorkDir": "/var/lib/docker/overlay2/00aa6884285e906b2cbf1036f7349f61e75babe804ccb78dff75a14cb723cc65/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "volume",
+                "Name": "8b2a6d733163d99bfdfe71cb5954c3a3acc633f32d354d6e1486209ea938bb34",
+                "Source": "/var/lib/docker/volumes/8b2a6d733163d99bfdfe71cb5954c3a3acc633f32d354d6e1486209ea938bb34/_data",
+                "Destination": "/data",
+                "Driver": "local",
+                "Mode": "",
+                "RW": true,
+                "Propagation": ""
+            }
+        ],
+        "Config": {
+            "Hostname": "7d1dbe9f7afb",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "6379/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOSU_VERSION=1.17",
+                "REDIS_VERSION=7.4.2",
+                "REDIS_DOWNLOAD_URL=http://download.redis.io/releases/redis-7.4.2.tar.gz",
+                "REDIS_DOWNLOAD_SHA=4ddebbf09061cbb589011786febdb34f29767dd7f89dbe712d2b68e808af6a1f"
+            ],
+            "Cmd": [
+                "redis-server"
+            ],
+            "Image": "redis:alpine",
+            "Volumes": {
+                "/data": {}
+            },
+            "WorkingDir": "/data",
+            "Entrypoint": [
+                "docker-entrypoint.sh"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "4c768010dbe2c54af46788ddab876acc46c9fc44f755b0eb07d024dd139a27f3",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:8f5c54441eb93183170be8c9fc2d8e8275171a6866ca1b4ae682a2ced6a98889",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "composetest",
+                "com.docker.compose.project.config_files": "/home/vanesa.manzanelli/CursoDevOpsTecnology/composetest/docker-compose.yml",
+                "com.docker.compose.project.working_dir": "/home/vanesa.manzanelli/CursoDevOpsTecnology/composetest",
+                "com.docker.compose.service": "redis",
+                "com.docker.compose.version": "2.22.0"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "c5f5a7848398999394dc83d36e42a3f267f34e6dbf247cfa910471809f79ad28",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "6379/tcp": null
+            },
+            "SandboxKey": "/var/run/docker/netns/c5f5a7848398",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "composetest_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "composetest-redis-1",
+                        "redis",
+                        "7d1dbe9f7afb"
+                    ],
+                    "NetworkID": "cdd537150d11ae4ae7d4cf70625a29ec24afcc080f0cad116a1d534a28f851ac",
+                    "EndpointID": "c8830868efb77f12a02b06add9d997387c5e2048259da29138f078acb32e443b",
+                    "Gateway": "172.23.0.1",
+                    "IPAddress": "172.23.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:17:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
 docker inspect redis:alpine
+
+[
+    {
+        "Id": "eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2",
+        "Created": "2025-03-28T18:57:59.155926254Z",
+        "Path": "python",
+        "Args": [
+            "app.py"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 173115,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2025-03-28T18:57:59.717520194Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:463b6e2ecafd4487cee284095ae68a793a3927aa909f8129832432d24868081e",
+        "ResolvConfPath": "/var/lib/docker/containers/eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2/hostname",
+        "HostsPath": "/var/lib/docker/containers/eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2/hosts",
+        "LogPath": "/var/lib/docker/containers/eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2/eb423d91c6d67b677aba6bf08c18a294d40be4baae2263de52ca8be923541ce2-json.log",
+        "Name": "/composetest-web-1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "composetest_default",
+            "PortBindings": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": null,
+            "DnsOptions": null,
+            "DnsSearch": null,
+            "ExtraHosts": [],
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": null,
+            "BlkioDeviceReadBps": null,
+            "BlkioDeviceWriteBps": null,
+            "BlkioDeviceReadIOps": null,
+            "BlkioDeviceWriteIOps": null,
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": null,
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/94caa81ec12d375b1b29dd17b56ad125c1afcd2d099dca7500dc9d15e6d3a90b-init/diff:/var/lib/docker/overlay2/xwakvt62l1xs0cex7pkqkrwkk/diff:/var/lib/docker/overlay2/jh5ivk4kf266i9vsh1o9dwe6r/diff:/var/lib/docker/overlay2/nu3pv0qt6u2gmbb1ih947uxc4/diff:/var/lib/docker/overlay2/fe534cdb6adeb93b87ff389384fcbacc10375ee409a62b983d9a8991d1738840/diff:/var/lib/docker/overlay2/1a0770857f97882bbb863722309aea1c67219054d32f19c2443f8c016e33e1cb/diff:/var/lib/docker/overlay2/57010659411c7ee501f129bd3d38592d2012a9197fe0a99e90ef10e0cb5170b4/diff:/var/lib/docker/overlay2/758236f563092fa92241aef2f7e11a809f9b82e876deef4d66ce9edb82fac8ea/diff:/var/lib/docker/overlay2/e3c8b5eaf5ffead0fd37c8d3d7bbd61dd58e42a8b73dbbcbed18749b22b52dcd/diff",
+                "MergedDir": "/var/lib/docker/overlay2/94caa81ec12d375b1b29dd17b56ad125c1afcd2d099dca7500dc9d15e6d3a90b/merged",
+                "UpperDir": "/var/lib/docker/overlay2/94caa81ec12d375b1b29dd17b56ad125c1afcd2d099dca7500dc9d15e6d3a90b/diff",
+                "WorkDir": "/var/lib/docker/overlay2/94caa81ec12d375b1b29dd17b56ad125c1afcd2d099dca7500dc9d15e6d3a90b/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "eb423d91c6d6",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "LANG=C.UTF-8",
+                "GPG_KEY=97FC712E4C024BBEA48A61ED3A5CA953F73C700D",
+                "PYTHON_VERSION=3.4.10",
+                "PYTHON_PIP_VERSION=19.0.3"
+            ],
+            "Cmd": [
+                "python",
+                "app.py"
+            ],
+            "Image": "composetest-web",
+            "Volumes": null,
+            "WorkingDir": "/code",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "com.docker.compose.config-hash": "121ce751666562521fde87a326aca176fd54e95591e3c185824865ea692f0c89",
+                "com.docker.compose.container-number": "1",
+                "com.docker.compose.depends_on": "",
+                "com.docker.compose.image": "sha256:463b6e2ecafd4487cee284095ae68a793a3927aa909f8129832432d24868081e",
+                "com.docker.compose.oneoff": "False",
+                "com.docker.compose.project": "composetest",
+                "com.docker.compose.project.config_files": "/home/vanesa.manzanelli/CursoDevOpsTecnology/composetest/docker-compose.yml",
+                "com.docker.compose.project.working_dir": "/home/vanesa.manzanelli/CursoDevOpsTecnology/composetest",
+                "com.docker.compose.service": "web",
+                "com.docker.compose.version": "2.22.0"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "7eca84140b141770881e40ce7c6456c567260cceb935b3b47ee269312d70d9ee",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {
+                "5000/tcp": [
+                    {
+                        "HostIp": "0.0.0.0",
+                        "HostPort": "5000"
+                    },
+                    {
+                        "HostIp": "::",
+                        "HostPort": "5000"
+                    }
+                ]
+            },
+            "SandboxKey": "/var/run/docker/netns/7eca84140b14",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "composetest_default": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": [
+                        "composetest-web-1",
+                        "web",
+                        "eb423d91c6d6"
+                    ],
+                    "NetworkID": "cdd537150d11ae4ae7d4cf70625a29ec24afcc080f0cad116a1d534a28f851ac",
+                    "EndpointID": "28376c9d485d5ca35cbff15e46874d49c0ba131314b51d738452d6e126af481e",
+                    "Gateway": "172.23.0.1",
+                    "IPAddress": "172.23.0.3",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:17:00:03",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+
 13. Refrescar varias veces el browser. Que se muestra?
 14. En la segunda terminal (posicionarse en donde este el yaml de docker compose) ejecutar:
 docker compose down
-Si en la primera se para con ctrl+c se apaga la aplicación y los containers pero no se borran y tampoco la red creada.
+(venv) vanesa.manzanelli@infraPC-0484:~/CursoDevOpsTecnology/composetest$ docker-compose down
+[+] Running 3/3
+ ✔ Container composetest-redis-1  Removed                                                                0.3s 
+ ✔ Container composetest-web-1    Removed                                                                0.5s 
+ ✔ Network composetest_default    Removed        
+
+Si en la primera se para con ctrl+c se apaga la aplicación y los containers pero no se borran y tampoco la 
+red creada.
+
 15. Editar el docker-compose.yml para agregar un volumen (conservar identacion):
 version: '3.7'
 services:
