@@ -115,3 +115,5 @@ https://12factor.net/disposability
 
 Kubernetes:
 https://github.com/diegochavezcarro/kube-labs/blob/main/instrucciones.txt
+
+![alt text](image.png)

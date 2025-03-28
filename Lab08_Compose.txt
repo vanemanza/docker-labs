@@ -591,17 +591,50 @@ docker compose up
 17. En el file system del Host, modificar el app.py,agregando por ej un "!":
 return 'Hello from Docker! I have been seen {} times.\n'.format(count)
 Probar en el browser si la modificacion se realizo.
+
 18. Bajar de nuevo:
 docker compose down
+(venv) vanesa.manzanelli@infraPC-0484:~/CursoDevOpsTecnology/composetest$ docker-compose down
+[+] Running 3/3
+ ✔ Container composetest-web-1    Removed                                                                                        0.5s 
+ ✔ Container composetest-redis-1  Removed                                                                                        0.5s 
+ ✔ Network composetest_default    Removed  
+
 19. Levantar en modo detachado:
 docker compose up -d
+
 20. Ver lo que se levanto (contenedores relacionados a este compose):
 docker compose ps
+
+NAME                  IMAGE               COMMAND                  SERVICE             CREATED             STATUS              PORTS
+composetest-redis-1   redis:alpine        "docker-entrypoint.s…"   redis               50 seconds ago      Up 48 seconds       6379/tcp
+composetest-web-1     composetest-web     "python app.py"          web                 50 seconds ago      Up 48 seconds       0.0.0.0:5000->5000/tcp, :::5000->5000/tcp
+
 21. Ver las variables de entorno del servicio web levantado:
 docker compose run web env
+
+[+] Building 0.0s (0/0)                                                                                                               
+[+] Building 0.0s (0/0)                                                                                                               
+PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=39be4547cb0a
+TERM=xterm
+LANG=C.UTF-8
+GPG_KEY=97FC712E4C024BBEA48A61ED3A5CA953F73C700D
+PYTHON_VERSION=3.4.10
+PYTHON_PIP_VERSION=19.0.3
+HOME=/root
+
 22. Bajar:
 docker compose stop
+
+[+] Stopping 2/2
+ ✔ Container composetest-web-1    Stopped                                                                                        0.5s 
+ ✔ Container composetest-redis-1  Stopped           
+
 23. Remover, incluyendo el volumen creado:
 docker compose down --volumes
 
-
+[+] Running 3/3
+ ✔ Container composetest-web-1    Removed                                                                                        0.0s 
+ ✔ Container composetest-redis-1  Removed                                                                                        0.0s 
+ ✔ Network composetest_default    Removed  
