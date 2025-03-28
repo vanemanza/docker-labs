@@ -1,54 +1,373 @@
 1. Levantar un container con la imagen busybox:
-docker run -itd --name=container1 busybox
+docker run -itd --name=container1 busybox - ok
 --name es para darle un nombre al container
+
 2. Crear otro container:
 docker run -itd --name=container2 busybox
-Cuantas imagenes creadas hay de busybox?
+
+Cuantas imagenes creadas hay de busybox? 1 
+
 3. Ver la red bridge que viene por defecto:
 docker network ls
+NETWORK ID     NAME                    DRIVER    SCOPE
+0478fdee7d41   bridge                  bridge    local
+704bf1c7437e   compose_default         bridge    local
+0ed640729fad   docker_app_network      bridge    local
+3de59258386c   docker_default          bridge    local
+3ddb9113b815   fastapi-nginx_default   bridge    local
+c107942e5ce8   host                    host      local
+60ca9e32adae   minikube                bridge    local
+8c97377f5451   none                    null      local
+
 docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "0478fdee7d41ff6d9ade450b13226e2e842a73f0b761136e595d79f6b55c33c7",
+        "Created": "2025-03-28T08:23:36.09433367-03:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "334bae6c1ef89e39a88846eefc88adb5da0c6961a536802ed4c73433c97a7ab7": {
+                "Name": "container2",
+                "EndpointID": "414d031e481ae5df1813c6b39e8839e024c2837de63de585164d7952b9496505",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "f82c2184e4bb2e72ad7655014cf0f39655083b2dab5a7b54d16cc4ca6e1f1b49": {
+                "Name": "container1",
+                "EndpointID": "82d44d4efe25372d34a9eaab2bef0b16207c75951e1ad99dd5c75232e068c37d",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+
 Que IPs fueron asignadas a los containers?
+
 Por ej:
-container1: 172.17.0.2
-container2: 172.17.0.3
+container1: 172.17.0.2 -> ok
+container2: 172.17.0.3 -> ok
+
 4. Atacharse al container1, tendremos permisos de root:
-docker attach container1
+
+
 Ejecutar:
 ifconfig
-ping 172.17.0.3 
-ping container2
-cat /etc/hosts
+
+/ # ifconfig
+eth0      Link encap:Ethernet  HWaddr 02:42:AC:11:00:02  
+          inet addr:172.17.0.2  Bcast:172.17.255.255  Mask:255.255.0.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:53 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:7018 (6.8 KiB)  TX bytes:0 (0.0 B)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+/ # 
+
+ping 172.17.0.3 -> ok
+ping container2 -> ping: bad address 'container2'
+cat /etc/hosts 
+127.0.0.1       localhost
+::1     localhost ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+172.17.0.2      f82c2184e4bb
+
 cat /etc/resolv.conf
+
+# This is /run/systemd/resolve/resolv.conf managed by man:systemd-resolved(8).
+# Do not edit.
+#
+# This file might be symlinked as /etc/resolv.conf. If you're looking at
+# /etc/resolv.conf and seeing this text, you have followed the symlink.
+#
+# This is a dynamic resolv.conf file for connecting local clients directly to
+# all known uplink DNS servers. This file lists all configured search domains.
+#
+# Third party programs should typically not access this file directly, but only
+# through the symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a
+# different way, replace this symlink by a static file or a different symlink.
+#
+# See man:systemd-resolved.service(8) for details about the supported modes of
+# operation for /etc/resolv.conf.
+
+nameserver 10.20.11.8
+nameserver 10.20.11.5
+search .
+
 5. Para detacharse sin parar al container no cerrar la terminal y abrir otra.
 
-6. Crear otra red, del tipo bridge:
+6. Crear otra red, del tipo bridge: ok
 docker network create --driver bridge mired
+NETWORK ID     NAME                    DRIVER    SCOPE
+0478fdee7d41   bridge                  bridge    local
+704bf1c7437e   compose_default         bridge    local
+0ed640729fad   docker_app_network      bridge    local
+3de59258386c   docker_default          bridge    local
+3ddb9113b815   fastapi-nginx_default   bridge    local
+c107942e5ce8   host                    host      local
+60ca9e32adae   minikube                bridge    local
+737cc7b53979   mired                   bridge    local
+8c97377f5451   none                    null      local
+
 7. Crear un contenedor que use esta red:
 docker run --network=mired -itd --name=container3 busybox
+
+CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                      PORTS                                            NAMES
+252366fdf839   busybox              "sh"                     13 seconds ago   Up 13 seconds                                                                container3
+334bae6c1ef8   busybox              "sh"                     5 minutes ago    Up 5 minutes                                                                 container2
+f82c2184e4bb   busybox              "sh"                     6 minutes ago    Up 6 minutes                                                                 container1
+437269d3c130   redis:alpine         "docker-entrypoint.s…"   38 minutes ago   Exited (0) 6 minutes ago                                                     compose-redis-1
+3c190cba0510   compose-web          "python app.py"          38 minutes ago   Exited (2) 38 minutes ago                                                    compose-web-1
+66dc1d863837   docker-app           "uvicorn app.main:ap…"   2 hours ago      Up 2 hours                  0.0.0.0:8000->8000/tcp, :::8000->8000/tcp        docker-app-1
+6f9fcac228d9   dpage/pgadmin4       "/entrypoint.sh"         2 hours ago      Up 2 hours                  443/tcp, 0.0.0.0:5050->80/tcp, :::5050->80/tcp   pgadmin
+113033df4a9d   postgres:15-alpine   "docker-entrypoint.s…"   2 hours ago      Up 2 hours                  0.0.0.0:5432->5432/tcp, :::5432->5432/tcp        postgresql_db
+
 8. Ver la red creada:
 docker network inspect mired
+
+[
+    {
+        "Name": "mired",
+        "Id": "737cc7b53979f4685f0768e6e17e8ddc4f35b117965bd23b5403f4b2dce990ba",
+        "Created": "2025-03-28T15:40:43.564107742-03:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "252366fdf8392d50bcbe968c0d0c5a2b9f9521f363522aa8d1d73fac5db0c86f": {
+                "Name": "container3",
+                "EndpointID": "6ce52f3c1656f5433a2e868923490ea0407faecc74f7944182cdc878315dafcf",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+
 9. Conectarse al ultimo container:
 docker attach container3
+
+
 10. Hacer ping a alguno de los anteriores containers:
 ping 172.17.0.2
-Que paso?
+Que paso? -> / # ping 172.17.0.2
+PING 172.17.0.2 (172.17.0.2): 56 data bytes
+
+
 Abrir otra terminal sin cerrar la actual.
 
 11. Conectar el container2 a la red mired:
 docker network connect mired container2
+
 12. Ejecutar:
 docker network inspect mired
+[
+    {
+        "Name": "mired",
+        "Id": "737cc7b53979f4685f0768e6e17e8ddc4f35b117965bd23b5403f4b2dce990ba",
+        "Created": "2025-03-28T15:40:43.564107742-03:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.21.0.0/16",
+                    "Gateway": "172.21.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "252366fdf8392d50bcbe968c0d0c5a2b9f9521f363522aa8d1d73fac5db0c86f": {
+                "Name": "container3",
+                "EndpointID": "6ce52f3c1656f5433a2e868923490ea0407faecc74f7944182cdc878315dafcf",
+                "MacAddress": "02:42:ac:15:00:02",
+                "IPv4Address": "172.21.0.2/16",
+                "IPv6Address": ""
+            },
+            "334bae6c1ef89e39a88846eefc88adb5da0c6961a536802ed4c73433c97a7ab7": {
+                "Name": "container2",
+                "EndpointID": "7baee471b10288daf9aab41d1bc8c654dd2dcf7b8efb8c66110029f8f37884bf",
+                "MacAddress": "02:42:ac:15:00:03",
+                "IPv4Address": "172.21.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+
 docker network inspect bridge
+
+[
+    {
+        "Name": "bridge",
+        "Id": "0478fdee7d41ff6d9ade450b13226e2e842a73f0b761136e595d79f6b55c33c7",
+        "Created": "2025-03-28T08:23:36.09433367-03:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "334bae6c1ef89e39a88846eefc88adb5da0c6961a536802ed4c73433c97a7ab7": {
+                "Name": "container2",
+                "EndpointID": "414d031e481ae5df1813c6b39e8839e024c2837de63de585164d7952b9496505",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            },
+            "f82c2184e4bb2e72ad7655014cf0f39655083b2dab5a7b54d16cc4ca6e1f1b49": {
+                "Name": "container1",
+                "EndpointID": "82d44d4efe25372d34a9eaab2bef0b16207c75951e1ad99dd5c75232e068c37d",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+
 Que paso en ambas redes?
+
 13. Conectar hacia el container3:
 docker attach container3
 14: Ejecutar ping hacia el container2, tanto con su IP para la red mired como con su nombre (container2)
 Que paso?
+(venv) vanesa.manzanelli@infraPC-0484:~/CursoDevOpsTecnology/network$ docker attach container3
+^C
+--- 172.17.0.2 ping statistics ---
+186 packets transmitted, 0 packets received, 100% packet loss
+/ # ping container2
+PING container2 (172.21.0.3): 56 data bytes
+64 bytes from 172.21.0.3: seq=0 ttl=64 time=0.311 ms
+64 bytes from 172.21.0.3: seq=1 ttl=64 time=0.242 ms
+64 bytes from 172.21.0.3: seq=2 ttl=64 time=0.195 ms
+64 bytes from 172.21.0.3: seq=3 ttl=64 time=0.217 ms
+64 bytes from 172.21.0.3: seq=4 ttl=64 time=0.227 ms
+64 bytes from 172.21.0.3: seq=5 ttl=64 time=0.237 ms
 
 15. Volver a estado inicial:
 docker network disconnect mired container2
 docker network disconnect mired container3
 docker network rm mired
-Con docker ps ver los id de los containers, darles stop, luego borrarlos y luego borrar la imagen de busybox.
- 
+
+Con docker ps ver los id de los containers, 
+darles stop, 
+luego borrarlos y 
+luego borrar la imagen de busybox.
+
+1) CONTAINER ID   IMAGE                COMMAND                  CREATED          STATUS                          PORTS                                            NAMES
+252366fdf839   busybox              "sh"                     6 minutes ago    Exited (0) About a minute ago                                                    container3
+334bae6c1ef8   busybox              "sh"                     12 minutes ago   Up 12 minutes                                                                    container2
+f82c2184e4bb   busybox              "sh"                     12 minutes ago   Up 12 minutes                                                                    container1
+437269d3c130   redis:alpine         "docker-entrypoint.s…"   45 minutes ago   Exited (0) 13 minutes ago                                                        compose-redis-1
+3c190cba0510   compose-web          "python app.py"          45 minutes ago   Exited (2) 45 minutes ago                                                        compose-web-1
+66dc1d863837   docker-app           "uvicorn app.main:ap…"   2 hours ago      Up 2 hours                      0.0.0.0:8000->8000/tcp, :::8000->8000/tcp        docker-app-1
+6f9fcac228d9   dpage/pgadmin4       "/entrypoint.sh"         2 hours ago      Up 2 hours                      443/tcp, 0.0.0.0:5050->80/tcp, :::5050->80/tcp   pgadmin
+113033df4a9d   postgres:15-alpine   "docker-entrypoint.s…"   2 hours ago      Up 2 hours                      0.0.0.0:5432->5432/tcp, :::5432->5432/tcp        postgresql_db
+
+2) (venv) vanesa.manzanelli@infraPC-0484:~/CursoDevOpsTecnology/network$ docker stop $(docker ps -q)
+334bae6c1ef8
+f82c2184e4bb
+66dc1d863837
+6f9fcac228d9
+113033df4a9d
 

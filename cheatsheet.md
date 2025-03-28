@@ -112,3 +112,6 @@ docker buildx build --platform linux/amd64,linux/arm64 -t diegochavezcarro/pytho
 
 the 12 FActor App
 https://12factor.net/disposability
+
+Kubernetes:
+https://github.com/diegochavezcarro/kube-labs/blob/main/instrucciones.txt

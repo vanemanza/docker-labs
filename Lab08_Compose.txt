@@ -1,10 +1,14 @@
 
-1. Ver si esta instalado docker-compose:
-docker compose version
+1. Ver si esta instalado docker-compose: ✅
+docker compose version -> Docker Compose version v2.22.0
+
 2. Crear un directorio en el Host, tener en cuenta que el mismo deberia estar
 en un directorio compartido, por lo general la home del usuario:
-Por ejemplo nombrarlo composetest, dentro del directorio home del usuario  
-3. Dentro del directorio creado crear un programa python (si se quiere evitar esta parte tan manual usar el repo https://github.com/diegochavezcarro/composetest), llamado app.py que contenga lo siguiente (conservar identacion):
+Por ejemplo nombrarlo composetest, dentro del directorio home del usuario  ✅
+
+3. Dentro del directorio creado crear un programa python (si se quiere evitar 
+esta parte tan manual usar el repo https://github.com/diegochavezcarro/composetest), 
+llamado app.py que contenga lo siguiente (conservar identacion): ✅
 
 from flask import Flask
 from redis import Redis
@@ -20,12 +24,12 @@ def hello():
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
 
-4. Crear otro archivo requirements.txt que contenga:
+4. Crear otro archivo requirements.txt que contenga: ✅
 
 flask
 redis
 
-5. Crear un archivo llamado Dockerfile (sin extension) que contenga:
+5. Crear un archivo llamado Dockerfile (sin extension) que contenga: ✅
 
 FROM python:3.4-alpine
 ADD . /code
@@ -33,7 +37,7 @@ WORKDIR /code
 RUN pip install -r requirements.txt
 CMD ["python", "app.py"]
 
-6. Crear un archivo docker-compose.yml que contenga (conservar identacion):
+6. Crear un archivo docker-compose.yml que contenga (conservar identacion): ✅
 
 version: '3.7'
 services:
@@ -44,10 +48,11 @@ services:
   redis:
     image: "redis:alpine"
 
-7. En una terminal posicionarse en el directorio (del Host, por ej cd "cd /c/Users/dchavez/composetest/") y ejecutar:
+7. En una terminal posicionarse en el directorio (del Host, por ej cd 
+"cd /c/Users/dchavez/composetest/") y ejecutar: ✅
 docker compose up
 
-8. En caso de estar en un Linux ir a un navegador e ir a:
+8. En caso de estar en un Linux ir a un navegador e ir a: ✅
 http://localhost:5000/
 
 9. En caso de estar usando una Virtual ver la IP de la vm (en otra terminal)y  usar tal IP en el browser. Por lo general se puede usar localhost, ya que las tools de docker mapean contra el mismo.

@@ -1,13 +1,17 @@
 Bind Volumes:
 
 1. Crear una carpeta dentro de algun directorio del host. Por ejemplo es conveniente en la
-home del usuario, o ver en el docker for win/Mac donde hay file sharing.
+home del usuario, o ver en el docker for win/Mac donde hay file sharing. ✅
+
 2.Crear un directorio llamado volumen, otro interno al mismo llamado carpeta y dentro del
-ultimo crear un archivo.txt
+ultimo crear un archivo.txt ✅
+
 En el caso Windows es conveniente sea del tipo (usar tu nombre de usuario):
 /c/Users/dchavez/volumen/carpeta
+
 3. Ejecutar:
 docker run -v /c/Users/dchavez/volumen/carpeta:/container/carpeta -i -t ubuntu  /bin/bash
+
 En el caso Docker for Windows aparecer‡ una ventana preguntando si permitimos compartir una carpeta, darle OK.
 4. En la terminal devuelta ejecutar:
 cd /container/carpeta/

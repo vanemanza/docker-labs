@@ -1,6 +1,8 @@
-1. Bajarse el codigo de https://github.com/diegochavezcarro/micro-gogin-tracing1
+1. Bajarse el codigo de https://github.com/diegochavezcarro/micro-gogin-tracing1 ✅
+
 2. Crear una imagen:
-docker build -t diegochavezcarro/micro-gogin-tracing1 .
+docker build -t diegochavezcarro/micro-gogin-tracing1 . ✅
+
 3. Listar las imagenes y ver el tamaño de la misma:
 docker image ls
 Que tamaño tiene?

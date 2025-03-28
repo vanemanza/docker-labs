@@ -44,9 +44,9 @@ Parar pararlo:
 sudo service docker stop
 sudo systemctl stop docker.socket
 
-2. El primer ejercicio es Lab01_ImagesContainers
-3. El segundo es el de la carpeta python.
-4. El tercero el de la carpeta node.
+2. El primer ejercicio es Lab01_ImagesContainers ✅
+3. El segundo es el de la carpeta python. ✅
+4. El tercero el de la carpeta node. ✅
 5. El cuarto, java.
 6. Seguir en la raiz del proyecto con la numeracion del 05 hacia adelante.
 9. Opcional: Ejercicio con Windows Containers (Docker for Windows): LabWinContainers
