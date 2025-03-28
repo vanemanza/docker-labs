@@ -117,3 +117,39 @@ Kubernetes:
 https://github.com/diegochavezcarro/kube-labs/blob/main/instrucciones.txt
 
 ![alt text](image.png)
+
+![alt text](image-1.png)
+
+![alt text](image-2.png)
+
+que es una db distribuida? en gral y en kubernetes?
+
+scheduler: controla hacia donde van los contenedores
+
+![alt text](image-3.png)
+
+![alt text](image-4.png)
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+![alt text](image-9.png)
+
+![alt text](image-10.png)
+
+![alt text](image-11.png)
+
+![alt text](image-12.png)
+
+minikube profile list
+
+minikune dashboard
+
+![alt text](image-13.png)
+
+![alt text](image-14.png)
